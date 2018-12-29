@@ -6,7 +6,7 @@ public class SetterDemoApp {
 
 	public static void main(String[] args) {
  
-		// load spring config file
+		// load spring configure file
 		ClassPathXmlApplicationContext context = 
 				new ClassPathXmlApplicationContext("applicationContext.xml");
 		// retrieve bean from spring container

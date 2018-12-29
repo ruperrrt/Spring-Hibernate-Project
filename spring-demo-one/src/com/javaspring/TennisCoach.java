@@ -17,5 +17,14 @@ public class TennisCoach implements Coach {
 	public String getDailyFortune() {
 		return fortuneService.getFortune();
 	}
-
+	
+	// add init method
+	public void startUpStuff() {
+		System.out.println("TennisCoach => inside method startUpStuff");
+	}
+	
+	// add destroy method
+	public void cleanUpStuff() {
+		System.out.println("TennisCoach => inside method cleanUpStuff");
+	}
 }
