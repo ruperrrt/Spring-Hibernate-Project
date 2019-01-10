@@ -7,7 +7,7 @@ import org.hibernate.cfg.Configuration;
 import com.srp.hibernate.demo.entity.Student;
 
 
-public class CreateStudentDemoApp {
+public class UpdateStudentDemoApp {
 
 	public static void main(String[] args) {
 		// create session factory
@@ -20,16 +20,22 @@ public class CreateStudentDemoApp {
 		Session session = factory.getCurrentSession();
 		
 		try {
-			// create a student object
-			System.out.println("Creating");
-			Student mystudent = new Student("Shu", "Xiong", "xiongshu0101@qq.com");
-			
+
 			// start a transaction
 			session.beginTransaction();
 			
-			// save object
-			System.out.println("Saving the student");
-			session.save(mystudent);
+			// using java to update
+			int studentId = 1;
+			Student s = session.get(Student.class, studentId);
+			s.setFirstName("Mao");
+			
+			
+			// using HQL to update
+			session
+				.createQuery("update Student s set email='foobar@gmail.com'"
+						+ " where s.lastName='Yin'")
+				.executeUpdate();
+			
 			
 			// commit transaction
 			session.getTransaction().commit();

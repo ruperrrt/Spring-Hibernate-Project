@@ -7,7 +7,7 @@ import org.hibernate.cfg.Configuration;
 import com.srp.hibernate.demo.entity.Student;
 
 
-public class CreateStudentDemoApp {
+public class DeleteStudentDemoApp {
 
 	public static void main(String[] args) {
 		// create session factory
@@ -21,15 +21,23 @@ public class CreateStudentDemoApp {
 		
 		try {
 			// create a student object
-			System.out.println("Creating");
-			Student mystudent = new Student("Shu", "Xiong", "xiongshu0101@qq.com");
+			//System.out.println("Creating");
+			//Student mystudent = new Student("Bruce", "Lin", "lwl0101@qq.com");
 			
 			// start a transaction
 			session.beginTransaction();
 			
-			// save object
-			System.out.println("Saving the student");
-			session.save(mystudent);
+			// delete using java
+			session.delete(session.get(Student.class, 5));
+			
+			// session.save(mystudent);
+			
+			// delete using HQL
+			
+			session
+				.createQuery("delete from Student where id=6")
+				.executeUpdate();
+			
 			
 			// commit transaction
 			session.getTransaction().commit();

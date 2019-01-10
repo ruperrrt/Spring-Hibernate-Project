@@ -7,7 +7,7 @@ import org.hibernate.cfg.Configuration;
 import com.srp.hibernate.demo.entity.Student;
 
 
-public class CreateStudentDemoApp {
+public class ReadStudentDemoApp {
 
 	public static void main(String[] args) {
 		// create session factory
@@ -20,18 +20,36 @@ public class CreateStudentDemoApp {
 		Session session = factory.getCurrentSession();
 		
 		try {
-			// create a student object
+			// read a student object from database
 			System.out.println("Creating");
-			Student mystudent = new Student("Shu", "Xiong", "xiongshu0101@qq.com");
+			Student mystudent = new Student("Jie", "Yin", "yinjie666@qq.com");
 			
 			// start a transaction
 			session.beginTransaction();
 			
 			// save object
 			System.out.println("Saving the student");
+			System.out.println(mystudent);
 			session.save(mystudent);
 			
 			// commit transaction
+			session.getTransaction().commit();
+			
+			// *** RETRIEVE STUDENT
+			
+			// find out primary key
+			System.out.println("Student saved. Generated id: " + mystudent.getId() );
+			
+			// start new session/transaction  => get student via id => commit
+			session = factory.getCurrentSession();
+			session.beginTransaction();
+			
+			
+			System.out.println("\nGetting student with id: " + mystudent.getId());
+			Student tempStudent = session.get(Student.class, mystudent.getId());
+			
+			System.out.println("Get completed: " + tempStudent);
+			
 			session.getTransaction().commit();
 			
 			System.out.println("Done!");
